@@ -10,7 +10,7 @@ annotate RiskService.Risks with @(UI : {
             Value : title
         },
         Description    : {
-         $Type : 'UI.DataField',
+            $Type : 'UI.DataField',
             Value : descr
         }
     },
@@ -21,6 +21,7 @@ annotate RiskService.Risks with @(UI : {
         {Value : title},
         {Value : miti_ID},
         {Value : owner},
+        {Value : bp_BusinessPartner},
         {
             Value       : prio,
             Criticality : criticality
@@ -42,6 +43,7 @@ annotate RiskService.Risks with @(UI : {
     FieldGroup #Main : {Data : [
         {Value : miti_ID},
         {Value : owner},
+        {Value : bp_BusinessPartner},
         {
             Value       : prio,
             Criticality : criticality
