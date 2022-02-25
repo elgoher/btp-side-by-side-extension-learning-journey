@@ -1,17 +1,16 @@
 {
-  "name": "risk-management",
+  "name": "cld200_ilt_case_study",
   "version": "1.0.0",
-  "description": "Template for the the SAP Extension Suite Learning Journey",
+  "description": "Starter Template for the CLD200 ILT Case Study.",
   "author": "m.haug@sap.com",
   "license": "SAP SAMPLE CODE LICENSE",
-  "repository": "https://github.com/SAP-samples/sap-learning-extension-suite",
+  "private": true,
+  "repository": "https://github.com/SAP-samples/extension-suite-learning-journey",
   "engines": {
     "node": ">=14"
   },
-  "private": true,
   "dependencies": {
-    "@sap/cds": "5.1.5",
-    "@sap/cds-dk": "4.1.5",
+    "@sap/cds": "^5",
     "express": "^4"
   },
   "devDependencies": {
@@ -20,5 +19,8 @@
   },
   "scripts": {
     "start": "cds run"
-  }
+  },
+  "sapux": [
+    "app/order-management"
+  ]
 }

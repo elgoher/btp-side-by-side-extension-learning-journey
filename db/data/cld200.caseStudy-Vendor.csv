@@ -1,0 +1,4 @@
+VendorUUID;VendorID;name;country;city;street;zip;state;email;phone
+6c1c5d1b-ee11-418f-b90d-2601e2ba0f26;00000001;Buffalooz;United States;Buffalo;48 Bottom Lane;14204;New York;buffalooz@examplemail;1234-222-3344
+09d9d460-4f5a-4414-beca-7d20ab8a47ef;00000002;Funny Example Gbr;Germany;Obernholz;Lietzenburger Straße 56;29386;Niedersachsen;funnyexample@examplemail;01234 38 70 46
+b7d41aec-d57c-4c1e-956f-6121188df88c;00000003;Swedish Cookie;Sweden;Nol;Korsträsk;440 41;;swedishcookie@examplemail;123-5969848

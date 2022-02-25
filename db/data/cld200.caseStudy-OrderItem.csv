@@ -1,0 +1,9 @@
+OrderItemUUID;OrderItemID;to_Order_OrderUUID;name;quantity;price;price_total;currency_code
+3d94041b-0969-4a55-ba03-02f27e8c55d6;00000001;31479849-0e47-43cd-8829-61c56cc165de;Chocolate Chip Cereal ;1;01.05;01.05;USD
+a784f69f-d3ad-4cdb-8db4-ab3fb877f187;00000002;31479849-0e47-43cd-8829-61c56cc165de;Crunchy Raspberry Cereal;2;2.33;4.66;USD
+d62a69d0-8d0e-4183-a5a8-b65ea4058a31;00000003;31479849-0e47-43cd-8829-61c56cc165de;Hawaii Coconut Cereal ;3;3.98;10.96;USD
+29d095e4-e7d2-4ae2-9ef8-6d9e14af5195;00000004;974120d3-cc5c-43f9-9145-db9049fc5612;Red Fighting Dragon Toy;1;14.99;14.99;USD
+bfbfe71a-6334-45b8-a59d-562bad5993d2;00000005;974120d3-cc5c-43f9-9145-db9049fc5612;Blue Slurpy Slime Toy;23;2.95;27.89;USD
+6d0c822c-e78c-4f82-8ba8-412075c8cd9d;00000006;cfd31f29-c816-4246-8227-986d2ab80d1a;Kanelsnäckor (Cinnamon bun - 6 pieces);1;6.98;6.98;USD
+2acfb8b7-28e0-4ba4-b071-6d454d3cd5fc;00000007;cfd31f29-c816-4246-8227-986d2ab80d1a;Drömmar (Dream cookies - 20 pieces);5;5.82;29.70;USD
+3185958e-b8d1-48b6-980a-eee274d5a847;00000008;cfd31f29-c816-4246-8227-986d2ab80d1a;Havrekakor  (Oat biscuits - 120 pieces);4;07.75;35.00;USD
