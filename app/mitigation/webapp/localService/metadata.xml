@@ -13,7 +13,7 @@
         <Schema Namespace="RiskService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
             <EntityContainer Name="EntityContainer">
                 <EntitySet Name="Risks" EntityType="RiskService.Risks">
-                    <NavigationPropertyBinding Path="mitigations" Target="Mitigations"/>
+                    <NavigationPropertyBinding Path="miti" Target="Mitigations"/>
                     <NavigationPropertyBinding Path="SiblingEntity" Target="Risks"/>
                 </EntitySet>
                 <EntitySet Name="Mitigations" EntityType="RiskService.Mitigations">
@@ -26,21 +26,21 @@
                     <PropertyRef Name="ID"/>
                     <PropertyRef Name="IsActiveEntity"/>
                 </Key>
-                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
                 <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
                 <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
                 <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
                 <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
                 <Property Name="title" Type="Edm.String" MaxLength="100"/>
                 <Property Name="owner" Type="Edm.String"/>
                 <Property Name="prio" Type="Edm.String" MaxLength="5"/>
                 <Property Name="descr" Type="Edm.String"/>
+                <NavigationProperty Name="miti" Type="RiskService.Mitigations" Partner="risks">
+                    <ReferentialConstraint Property="miti_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="miti_ID" Type="Edm.Guid"/>
                 <Property Name="impact" Type="Edm.Int32"/>
                 <Property Name="criticality" Type="Edm.Int32"/>
-                <NavigationProperty Name="mitigations" Type="RiskService.Mitigations" Partner="risks">
-                    <ReferentialConstraint Property="mitigations_ID" ReferencedProperty="ID"/>
-                </NavigationProperty>
-                <Property Name="mitigations_ID" Type="Edm.Guid"/>
                 <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
                 <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
                 <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
@@ -52,17 +52,15 @@
                     <PropertyRef Name="ID"/>
                     <PropertyRef Name="IsActiveEntity"/>
                 </Key>
-                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
                 <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
                 <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
                 <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
                 <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
                 <Property Name="descr" Type="Edm.String"/>
                 <Property Name="owner" Type="Edm.String"/>
                 <Property Name="timeline" Type="Edm.String"/>
-                <NavigationProperty Name="risks" Type="Collection(RiskService.Risks)" Partner="mitigations">
-                    <OnDelete Action="Cascade"/>
-                </NavigationProperty>
+                <NavigationProperty Name="risks" Type="Collection(RiskService.Risks)" Partner="miti"/>
                 <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
                 <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
                 <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
@@ -93,8 +91,17 @@
                 <ReturnType Type="RiskService.Mitigations"/>
             </Action>
             <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="RiskService.Risks"/>
+                <ReturnType Type="RiskService.Risks"/>
+            </Action>
+            <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
                 <Parameter Name="in" Type="RiskService.Mitigations"/>
                 <ReturnType Type="RiskService.Mitigations"/>
+            </Action>
+            <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="RiskService.Risks"/>
+                <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+                <ReturnType Type="RiskService.Risks"/>
             </Action>
             <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
                 <Parameter Name="in" Type="RiskService.Mitigations"/>
@@ -102,8 +109,10 @@
                 <ReturnType Type="RiskService.Mitigations"/>
             </Action>
             <Annotations Target="RiskService.EntityContainer/Risks">
-                <Annotation Term="Common.DraftNode">
-                    <Record Type="Common.DraftNodeType">
+                <Annotation Term="Common.DraftRoot">
+                    <Record Type="Common.DraftRootType">
+                        <PropertyValue Property="ActivationAction" String="RiskService.draftActivate"/>
+                        <PropertyValue Property="EditAction" String="RiskService.draftEdit"/>
                         <PropertyValue Property="PreparationAction" String="RiskService.draftPrepare"/>
                     </Record>
                 </Annotation>
@@ -131,6 +140,9 @@
                                 <Annotation Term="Core.Computed" Bool="true"/>
                                 <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
                                     <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                    </Annotations>
+                                    <Annotations Target="RiskService.Risks/ID">
+                                        <Annotation Term="Core.Computed" Bool="true"/>
                                     </Annotations>
                                     <Annotations Target="RiskService.Risks/IsActiveEntity">
                                         <Annotation Term="UI.Hidden" Bool="true"/>
@@ -176,6 +188,9 @@
                                                         <Annotation Term="Core.Computed" Bool="true"/>
                                                         <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
                                                             <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                                            </Annotations>
+                                                            <Annotations Target="RiskService.Mitigations/ID">
+                                                                <Annotation Term="Core.Computed" Bool="true"/>
                                                             </Annotations>
                                                             <Annotations Target="RiskService.Mitigations/IsActiveEntity">
                                                                 <Annotation Term="UI.Hidden" Bool="true"/>

@@ -18,7 +18,7 @@ using RiskService from '../../srv/risk-service';
     // Define the table columns
     LineItem : [
        {Value : title},
-       {Value : miti_ID},
+       {Value : mitigations_ID},
        {Value : owner},
        { 
           Value : prio,
@@ -38,7 +38,7 @@ using RiskService from '../../srv/risk-service';
         Target : '@UI.FieldGroup#Main',
      }],
      FieldGroup #Main : {Data : [
-       {Value : miti_ID},
+       {Value : mitigations_ID},
        {Value : owner},
        {
            Value : prio,

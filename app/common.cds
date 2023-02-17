@@ -7,9 +7,10 @@ using riskmanagement as rm from '../db/schema';
  owner  @title : 'Owner';
  prio   @title : 'Priority';
  descr  @title : 'Description';
- miti   @title : 'Mitigation';
+ mitigationId   @title : 'Mitigation';
  impact @title : 'Impact';
  } 
+
 
 // Annotate Miti elements
  annotate rm.Mitigations with {
@@ -22,9 +23,9 @@ descr @title : 'Description';
  }
 
 annotate rm.Risks with {
-   miti @(Common : {
+   mitigationId @(Common : {
     //show text, not id for mitigation in the context of risks
-    Text            : miti.descr,
+    Text            : mitigationId.descr,
     TextArrangement : #TextOnly,
     ValueList       : {
     Label          : 'Mitigations',
@@ -32,7 +33,7 @@ annotate rm.Risks with {
     Parameters     : [
        {
        $Type : 'Common.ValueListParameterInOut',
-       LocalDataProperty : miti_ID,
+       LocalDataProperty : mitigationId,
        ValueListProperty : 'ID'
        },
        {

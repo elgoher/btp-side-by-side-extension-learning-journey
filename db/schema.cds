@@ -1,26 +1,27 @@
 namespace riskmanagement;
 
-using { managed } from '@sap/cds/common';
-
-entity Risks : managed
+using
 {
-    key ID : UUID
-        @Core.Computed;
+    managed,
+    cuid
+}
+from '@sap/cds/common';
+
+entity Risks : cuid, managed
+{
     title : String(100);
     owner : String;
     prio : String(5);
     descr : String;
-    miti : Association to one Mitigations;
     impact : Integer;
     criticality : Integer;
+    mitigations : Association to one Mitigations;
 }
 
-entity Mitigations : managed
+entity Mitigations : cuid, managed
 {
-    key ID : UUID
-        @Core.Computed;
     descr : String;
     owner : String;
     timeline : String;
-    risks : Association to many Risks on risks.miti = $self;
+    risks : Composition of many Risks on risks.mitigations = $self;
 }

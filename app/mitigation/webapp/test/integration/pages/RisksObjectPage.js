@@ -8,7 +8,7 @@ sap.ui.define(['sap/fe/test/ObjectPage'], function(ObjectPage) {
 
     return new ObjectPage(
         {
-            appId: 'com.sap.risk.risk',
+            appId: 'mitigation.mitigation',
             componentId: 'RisksObjectPage',
             entitySet: 'Risks'
         },

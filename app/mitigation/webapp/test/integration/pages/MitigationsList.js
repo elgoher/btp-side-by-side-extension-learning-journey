@@ -8,9 +8,9 @@ sap.ui.define(['sap/fe/test/ListReport'], function(ListReport) {
 
     return new ListReport(
         {
-            appId: 'com.sap.risk.risk',
-            componentId: 'RisksList',
-            entitySet: 'Risks'
+            appId: 'mitigation.mitigation',
+            componentId: 'MitigationsList',
+            entitySet: 'Mitigations'
         },
         CustomPageDefinitions
     );

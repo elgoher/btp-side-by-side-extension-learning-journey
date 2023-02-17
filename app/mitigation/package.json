@@ -1,7 +1,7 @@
 {
-    "name": "risk",
+    "name": "mitigation",
     "version": "0.0.1",
-    "description": "Risk Management",
+    "description": "Mitigations",
     "keywords": [
         "ui5",
         "openui5",

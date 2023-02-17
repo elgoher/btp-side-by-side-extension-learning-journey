@@ -3,7 +3,7 @@ sap.ui.define(
     function (Component) {
         "use strict";
 
-        return Component.extend("com.sap.risk.risk.Component", {
+        return Component.extend("mitigation.mitigation.Component", {
             metadata: {
                 manifest: "json"
             }
