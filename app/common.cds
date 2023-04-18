@@ -7,10 +7,22 @@ annotate rm.Risks with {
    owner @title: 'Owner';
    prio @title: 'Priority';
    descr @title: 'Description';
-   mitigationId @title: 'Mitigation';
+   mitigations @title: 'Mitigation';
+   bp @title: 'Business Partner';
    impact @title: 'Impact';
 }
 
+// Annotate BusinessPartners elements
+annotate rm.BusinessPartners with {
+   BusinessPartner @(
+      UI.Hidden,
+      Common: {
+         Text: LastName
+      }
+   );
+   LastName @title: 'Last Name';
+   FirstName @title: 'First Name';
+}
 
 // Annotate Miti elements
 annotate rm.Mitigations with {
@@ -25,16 +37,16 @@ annotate rm.Mitigations with {
 }
 
 annotate rm.Risks with {
-   mitigationId @(Common: {
+   mitigations @(Common: {
       //show text, not id for mitigation in the context of risks
-      Text: mitigationId.descr,
+      Text: mitigations.descr,
       TextArrangement: #TextOnly,
       ValueList: {
          Label: 'Mitigations',
          CollectionPath: 'Mitigations',
          Parameters: [{
                $Type: 'Common.ValueListParameterInOut',
-               LocalDataProperty: mitigationId,
+               LocalDataProperty: mitigations_ID,
                ValueListProperty: 'ID'
             },
             {
@@ -44,4 +56,26 @@ annotate rm.Risks with {
          ]
       }
    });
+   bp @(Common: {
+      Text: bp.LastName,
+      TextArrangement: #TextOnly,
+      ValueList: {
+         Label: 'Business Partners',
+         CollectionPath: 'BusinessPartners',
+         Parameters: [{
+               $Type: 'Common.ValueListParameterInOut',
+               LocalDataProperty: bp_BusinessPartner,
+               ValueListProperty: 'BusinessPartner'
+            },
+            {
+               $Type: 'Common.ValueListParameterDisplayOnly',
+               ValueListProperty: 'LastName'
+            },
+            {
+               $Type: 'Common.ValueListParameterDisplayOnly',
+               ValueListProperty: 'FirstName'
+            }
+         ]
+      }
+   })
 }

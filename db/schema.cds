@@ -7,6 +7,8 @@ using
 }
 from '@sap/cds/common';
 
+using { API_BUSINESS_PARTNER as external } from '../srv/external/API_BUSINESS_PARTNER.csn';
+
 entity Risks : cuid, managed
 {
     title : String(100);
@@ -16,6 +18,7 @@ entity Risks : cuid, managed
     impact : Integer;
     criticality : Integer;
     mitigations : Association to one Mitigations;
+    bp : Association to one BusinessPartners;
 }
 
 entity Mitigations : cuid, managed
@@ -23,5 +26,12 @@ entity Mitigations : cuid, managed
     descr : String;
     owner : String;
     timeline : String;
-    risks : Composition of many Risks on risks.mitigations = $self;
+    risks : Association to many Risks on risks.mitigations = $self;
 }
+
+entity BusinessPartners as projection on external.A_BusinessPartner
+{
+    key BusinessPartner,
+    FirstName,
+    LastName,
+};

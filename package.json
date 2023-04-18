@@ -17,10 +17,6 @@
     "@sap/xssec": "^3",
     "passport": "^0"
   },
-  "devDependencies": {
-    "@sap/ux-specification": "^1.102.17",
-    "sqlite3": "^5.0.4"
-  },
   "scripts": {
     "start": "cds run",
     "watch-risk": "cds watch --open risk/webapp/index.html?sap-ui-xx-viewCache=false",
@@ -54,8 +50,11 @@
   "cds": {
     "requires": {
       "API_BUSINESS_PARTNER": {
-        "kind": "odata-v2",
-        "model": "srv\\external\\API_BUSINESS_PARTNER"
+        "kind": "odata",
+        "model": "srv/external/API_BUSINESS_PARTNER",
+        "credentials": {
+          "url": "https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_BUSINESS_PARTNER/"
+        }
       },
       "[production]": {
         "db": {
@@ -63,6 +62,9 @@
         },
         "auth": {
           "kind": "xsuaa"
+        },
+        "approuter": {
+          "kind": "cloudfoundry"
         }
       },
       "db": {
