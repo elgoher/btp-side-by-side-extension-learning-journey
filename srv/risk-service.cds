@@ -15,4 +15,7 @@ service RiskService {
     projection on rm.Mitigations;
 
     @readonly entity BusinessPartners as projection on rm.BusinessPartners;
+
+    @readonly
+    entity CurrentWeather as projection on rm.Weather;
 }

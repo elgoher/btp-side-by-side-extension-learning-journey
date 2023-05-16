@@ -24,12 +24,13 @@
 //    });
 // });
 
-const cds = require('@sap/cds')
+const cds = require('@sap/cds');
 module.exports = async function () {
    // Define constants for the Risk and BusinessPartners entities from the risk-service.cds file
    const {
       Risks,
-      BusinessPartners
+      BusinessPartners,
+      CurrentWeather
    } = this.entities;
 
    /**
@@ -123,8 +124,15 @@ module.exports = async function () {
                risk.bp = bp;
             })
          );
+         
       } catch (error) {
          console.log(error);
       }
    });
+
+   this.on("READ", CurrentWeather, async (req) => {
+      const openWeatherApi = await cds.connect.to("OpenWeatherApi");
+      return openWeatherApi.tx(req).run(req.query);
+    });
+
 }

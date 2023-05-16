@@ -12,9 +12,9 @@
   "dependencies": {
     "@sap-cloud-sdk/http-client": "^2.5.0",
     "@sap/cds": "^6",
+    "@sap/xssec": "^3",
     "express": "^4",
     "hdb": "^0.19.0",
-    "@sap/xssec": "^3",
     "passport": "^0"
   },
   "scripts": {
@@ -56,6 +56,13 @@
           "url": "https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_BUSINESS_PARTNER/"
         }
       },
+      "OpenWeatherApi": {
+        "kind": "rest",
+        "impl": "srv/external/OpenWeatherApi.js",
+        "credentials": {
+          "url": "https://api.openweathermap.org/data/2.5"
+        }
+      },
       "[production]": {
         "db": {
           "kind": "hana-cloud"
@@ -68,7 +75,10 @@
         }
       },
       "db": {
-        "kind": "sql"
+        "kind": "sql",
+        "credentials": {
+          "database": "my.db"
+        }
       }
     }
   },
@@ -76,5 +86,8 @@
     "app/risk",
     "app/mitigation",
     "app/risk"
-  ]
+  ],
+  "devDependencies": {
+    "sqlite3": "^5.1.6"
+  }
 }
