@@ -1,93 +1,105 @@
 {
-  "name": "risk-management",
-  "version": "2.0.0",
-  "description": "Template for the Learning Journey Building side-by-side extensions on SAP BTP",
-  "author": "m.haug@sap.com",
-  "license": "SAP SAMPLE CODE LICENSE",
-  "repository": "https://github.com/SAP-samples/sap-learning-extension-suite",
-  "engines": {
-    "node": ">=14"
-  },
-  "private": true,
-  "dependencies": {
-    "@sap-cloud-sdk/http-client": "^2.5.0",
-    "@sap/cds": "^6",
-    "@sap/xssec": "^3",
-    "express": "^4",
-    "hdb": "^0.19.0",
-    "passport": "^0"
-  },
-  "scripts": {
-    "start": "cds run",
-    "watch-risk": "cds watch --open risk/webapp/index.html?sap-ui-xx-viewCache=false",
-    "watch-mitigation": "cds watch --open mitigation/webapp/index.html?sap-ui-xx-viewCache=false"
-  },
-  "eslintConfig": {
-    "extends": "eslint:recommended",
-    "env": {
-      "es2020": true,
-      "node": true,
-      "jest": true,
-      "mocha": true
+    "name": "risk-management",
+    "version": "2.0.0",
+    "description": "Template for the Learning Journey Building side-by-side extensions on SAP BTP",
+    "author": "m.haug@sap.com",
+    "license": "SAP SAMPLE CODE LICENSE",
+    "repository": "https://github.com/SAP-samples/sap-learning-extension-suite",
+    "engines": {
+        "node": ">=14"
     },
-    "globals": {
-      "SELECT": true,
-      "INSERT": true,
-      "UPDATE": true,
-      "DELETE": true,
-      "CREATE": true,
-      "DROP": true,
-      "CDL": true,
-      "CQL": true,
-      "CXL": true,
-      "cds": true
+    "private": true,
+    "dependencies": {
+        "@sap-cloud-sdk/http-client": "^2.5.0",
+        "@sap/cds": "^6",
+        "@sap/xssec": "^3",
+        "express": "^4",
+        "hdb": "^0.19.0",
+        "passport": "^0"
     },
-    "rules": {
-      "no-console": "off",
-      "require-atomic-updates": "off"
-    }
-  },
-  "cds": {
-    "requires": {
-      "API_BUSINESS_PARTNER": {
-        "kind": "odata",
-        "model": "srv/external/API_BUSINESS_PARTNER",
-        "credentials": {
-          "url": "https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_BUSINESS_PARTNER/"
-        }
-      },
-      "OpenWeatherApi": {
-        "kind": "rest",
-        "impl": "srv/external/OpenWeatherApi.js",
-        "credentials": {
-          "url": "https://api.openweathermap.org/data/2.5"
-        }
-      },
-      "[production]": {
-        "db": {
-          "kind": "hana-cloud"
+    "scripts": {
+        "start": "cds run",
+        "watch-risk": "cds watch --open risk/webapp/index.html?sap-ui-xx-viewCache=false",
+        "watch-mitigation": "cds watch --open mitigation/webapp/index.html?sap-ui-xx-viewCache=false",
+        "undeploy": "cf undeploy risk-management --delete-services --delete-service-keys --delete-service-brokers",
+        "build": "rimraf resources mta_archives && mbt build --mtar archive",
+        "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
+    },
+    "eslintConfig": {
+        "extends": "eslint:recommended",
+        "env": {
+            "es2020": true,
+            "node": true,
+            "jest": true,
+            "mocha": true
         },
-        "auth": {
-          "kind": "xsuaa"
+        "globals": {
+            "SELECT": true,
+            "INSERT": true,
+            "UPDATE": true,
+            "DELETE": true,
+            "CREATE": true,
+            "DROP": true,
+            "CDL": true,
+            "CQL": true,
+            "CXL": true,
+            "cds": true
         },
-        "approuter": {
-          "kind": "cloudfoundry"
+        "rules": {
+            "no-console": "off",
+            "require-atomic-updates": "off"
         }
-      },
-      "db": {
-        "kind": "sql",
-        "credentials": {
-          "database": "my.db"
+    },
+    "cds": {
+        "requires": {
+            "API_BUSINESS_PARTNER": {
+                "kind": "odata",
+                "model": "srv/external/API_BUSINESS_PARTNER",
+                "credentials": {
+                    "url": "https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_BUSINESS_PARTNER/"
+                }
+            },
+            "OpenWeatherApi": {
+                "kind": "rest",
+                "impl": "srv/external/OpenWeatherApi.js",
+                "credentials": {
+                    "url": "https://api.openweathermap.org/data/2.5"
+                }
+            },
+            "[production]": {
+                "db": {
+                    "kind": "hana-cloud"
+                },
+                "auth": {
+                    "kind": "xsuaa"
+                },
+                "approuter": {
+                    "kind": "cloudfoundry"
+                }
+            },
+            "db": {
+                "kind": "sql",
+                "credentials": {
+                    "database": "my.db"
+                }
+            },
+            "ZARIBA_PURCHASE_ORDERS_SRV": {
+                "kind": "odata-v2",
+                "model": "srv/external/ZARIBA_PURCHASE_ORDERS_SRV",
+                "credentials": {
+                    "destination": "S4HANA_LAC",
+                    "path": "/sap/opu/odata/sap/ZARIBA_PURCHASE_ORDERS_SRV"
+                }
+            }
         }
-      }
+    },
+    "sapux": [
+        "app/risk",
+        "app/mitigation"
+    ],
+    "devDependencies": {
+        "@sap/ux-specification": "^1.108.5",
+        "sqlite3": "^5.1.6",
+        "rimraf": "^3.0.2"
     }
-  },
-  "sapux": [
-    "app/risk",
-    "app/mitigation",
-    "app/risk"
-  ],
-  "devDependencies": {
-    "sqlite3": "^5.1.6"
-  }
 }

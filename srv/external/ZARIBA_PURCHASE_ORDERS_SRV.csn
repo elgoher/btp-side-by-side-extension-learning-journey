@@ -1,0 +1,76 @@
+{
+  "meta": {
+    "creator": "cds-dk 6.8.1"
+  },
+  "$version": "2.0",
+  "definitions": {
+    "ZARIBA_PURCHASE_ORDERS_SRV": {
+      "kind": "service",
+      "@cds.external": true,
+      "@m.IsDefaultEntityContainer": "true",
+      "@sap.supported.formats": "atom json xlsx"
+    },
+    "ZARIBA_PURCHASE_ORDERS_SRV.ZARIBA_PURCHASE_ORDERSet": {
+      "kind": "entity",
+      "@cds.external": true,
+      "@cds.persistence.skip": true,
+      "@sap.searchable": "true",
+      "@sap.pageable": "false",
+      "@sap.content.version": "1",
+      "elements": {
+        "Documentnumber": {
+          "key": true,
+          "type": "cds.LargeString",
+          "@sap.unicode": "false",
+          "@sap.label": "DOCUMENTNUMBER",
+          "@sap.updatable": "false",
+          "notNull": true
+        },
+        "Suppliername": {
+          "type": "cds.LargeString",
+          "@sap.unicode": "false",
+          "@sap.label": "SUPPLIERNAME",
+          "@sap.updatable": "false",
+          "notNull": true
+        },
+        "Poshiptocity": {
+          "type": "cds.LargeString",
+          "@sap.unicode": "false",
+          "@sap.label": "POSHIPTOCITY",
+          "notNull": true
+        },
+        "Poshiptocountry": {
+          "type": "cds.LargeString",
+          "@sap.unicode": "false",
+          "@sap.label": "POSHIPTOCOUNTRY",
+          "@sap.filterable": "false",
+          "notNull": true
+        },
+        "Poshiptostate": {
+          "type": "cds.LargeString",
+          "@sap.unicode": "false",
+          "@sap.label": "POSHIPTOSTATE",
+          "notNull": true
+        },
+        "Companycode": {
+          "type": "cds.LargeString",
+          "@sap.unicode": "false",
+          "@sap.label": "COMPANYCODE",
+          "@sap.updatable": "false",
+          "notNull": true
+        },
+        "Disputeid": {
+          "type": "cds.LargeString",
+          "@sap.unicode": "false",
+          "@sap.label": "DISPUTEID"
+        },
+        "Status": {
+          "type": "cds.LargeString",
+          "@sap.unicode": "false",
+          "@sap.label": "STATUS",
+          "notNull": true
+        }
+      }
+    }
+  }
+}

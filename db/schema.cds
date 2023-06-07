@@ -11,6 +11,12 @@ using {
 }
 from '../srv/external/API_BUSINESS_PARTNER.csn';
 
+using {
+    ZARIBA_PURCHASE_ORDERS_SRV as S4H
+}
+from '../srv/external/ZARIBA_PURCHASE_ORDERS_SRV.csn';
+
+
 entity Risks: cuid, managed {
     title: String(100);
     owner: String;
@@ -33,6 +39,17 @@ entity BusinessPartners as projection on external.A_BusinessPartner {
     key BusinessPartner,
     FirstName,
     LastName,
+};
+
+entity ZARIBA_PURCHASE_ORDERSet as projection on S4H.ZARIBA_PURCHASE_ORDERSet {
+    key Documentnumber,
+    Suppliername,
+    Poshiptocity,
+    Poshiptocountry,
+    Poshiptostate,
+    Companycode,
+    Disputeid,
+    Status
 };
 
 type WeatherCondition: {

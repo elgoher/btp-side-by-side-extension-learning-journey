@@ -51,6 +51,9 @@ module.exports = async function () {
    // connect to remote service
    const BPsrv = await cds.connect.to("API_BUSINESS_PARTNER");
 
+   //test
+   const S4srv = await cds.connect.to("ZARIBA_PURCHASE_ORDERS_SRV");
+
    /**
     * Event-handler for read-events on the BusinessPartners entity.
     * Each request to the API Business Hub requires the apikey in the header.
@@ -61,6 +64,7 @@ module.exports = async function () {
       req.query.where("LastName <> '' and FirstName <> '' ");
       //REMOVE THE COUNT PARAMETER -- Fix value help
       req.query.SELECT.count = false;
+
       return await BPsrv.transaction(req).send({
          query: req.query,
          headers: {
@@ -101,6 +105,13 @@ module.exports = async function () {
          });
       }
 
+      //test
+      var results = S4srv.transaction(req).send({
+         query: req.query
+      });
+      console.log(results);
+
+
       /*
         Instead of carrying out the expand, issue a separate request for each business partner
         This code could be optimized, instead of having n requests for n business partners, just one bulk request could be created
@@ -124,7 +135,7 @@ module.exports = async function () {
                risk.bp = bp;
             })
          );
-         
+
       } catch (error) {
          console.log(error);
       }
@@ -133,6 +144,6 @@ module.exports = async function () {
    this.on("READ", CurrentWeather, async (req) => {
       const openWeatherApi = await cds.connect.to("OpenWeatherApi");
       return openWeatherApi.tx(req).run(req.query);
-    });
+   });
 
 }
